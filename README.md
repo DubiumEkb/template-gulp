@@ -32,7 +32,6 @@ template-gulp/
 │   │   └── zip.js
 │   └── version.json
 ├── .gitignore
-├── .env
 ├── package.json
 ├── gulpfile.js
 ├── README.md
