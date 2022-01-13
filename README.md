@@ -1,31 +1,46 @@
 # template-gulp
 ## Scripts gulp
+`yarn run svgSpriteBuild` - Build file sprite.svg
+`yarn run dev` - Development
+`yarn run devToFTP` - Development and send in FTP server
+`yarn run build` - Build
+`yarn run buildToZIP` - Build and send to ZIP
+`yarn run buildToFTP` - Build and send in FTP server
 
 ## File structure
 ```
 template-gulp/
 ├── dist
 ├── src/
-│   ├── template
-│   ├── layout
-│   ├── scss
+│   ├── fonts
 │   ├── img
-│   ├── js
+│   ├── js/
+│   │   ├── components/
+│   │   │   └── webp.js
+│   │   └── app.js
+│   ├── layout/
+│   │   └── index.html
+│   ├── scss/
+│   │   ├── components/
+│   │   │   └── _fonts.scss
+│   │   └── style.scss
 │   ├── svgSprite
-│   └── fonts
+│   └── template/
+│       ├── footer.html
+│       ├── head.html
+│       └── header.html
 ├── gulp/
 │   ├── config/
 │   │   ├── ftp.js
 │   │   ├── path.js
 │   │   └── plugins.js
 │   ├── tasks/
-│   │   ├── copy.js
 │   │   ├── fonts.js
 │   │   ├── ftp.js
 │   │   ├── html.js
 │   │   ├── images.js
-│   │   ├── scripts.js
 │   │   ├── reset.js
+│   │   ├── scripts.js
 │   │   ├── scss.js
 │   │   ├── server.js
 │   │   ├── svgSprite.js
