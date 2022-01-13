@@ -1,10 +1,15 @@
 # template-gulp
 ## Scripts gulp
 `yarn run svgSpriteBuild` - Build file sprite.svg
+
 `yarn run dev` - Development
+
 `yarn run devToFTP` - Development and send in FTP server
+
 `yarn run build` - Build
+
 `yarn run buildToZIP` - Build and send to ZIP
+
 `yarn run buildToFTP` - Build and send in FTP server
 
 ## File structure
