@@ -1,0 +1,8 @@
+const configFTP = {
+	host: "",
+	user: "",
+	password: "",
+	parallel: 5,
+}
+
+module.exports = { configFTP }
