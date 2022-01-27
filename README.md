@@ -8,9 +8,9 @@
 
 `yarn run build` - Build
 
-`yarn run buildScripts` - Build JavaScripts
+`yarn run buildScripts` - Build compression JavaScripts  
 
-`yarn run buildImages` - Build images to webp
+`yarn run buildImages` - Build compression images to webp
 
 `yarn run buildToZIP` - Build and send to ZIP
 
