@@ -9,6 +9,8 @@
     "dev": "gulp",
     "devToFTP": "gulp devToFTP",
     "build": "gulp build --build",
+    "buildScripts": "gulp buildScripts --build",
+    "buildImages": "gulp buildImages --build",
     "buildToZIP": "gulp buildToZIP --build",
     "buildToFTP": "gulp buildToFTP --build"
   },

@@ -53,6 +53,8 @@ const mainTasks = gulp.series(
 const dev = gulp.series(reset, mainTasks, gulp.parallel(watcher, server))
 const devToFTP = gulp.series(reset, mainTasks, gulp.parallel(watcherToFTP, server))
 const build = gulp.series(reset, mainTasks)
+const buildScripts = gulp.series(reset, scripts)
+const buildImages = gulp.series(reset, images)
 const buildToZIP = gulp.series(reset, mainTasks, zip)
 const buildToFTP = gulp.series(reset, mainTasks, ftp)
 
@@ -67,6 +69,12 @@ exports.devToFTP = devToFTP
 
 // Build project
 exports.build = build
+
+// Build Scripts
+exports.buildScripts = buildScripts
+
+// Build Images
+exports.buildImages = buildImages
 
 // Build to ZIP
 exports.buildToZIP = buildToZIP
