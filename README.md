@@ -8,6 +8,10 @@
 
 `yarn run build` - Build
 
+`yarn run buildScripts` - Build JavaScripts
+
+`yarn run buildImages` - Build images to webp
+
 `yarn run buildToZIP` - Build and send to ZIP
 
 `yarn run buildToFTP` - Build and send in FTP server
