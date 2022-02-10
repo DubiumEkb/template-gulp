@@ -1,0 +1,84 @@
+.flexbox {
+	display: flex;
+	flex-wrap: wrap;
+	margin-left: -15px;
+	margin-right: -15px;
+}
+%flexbox-column {
+	position: relative;
+	width: 100%;
+	padding-left: 15px;
+	padding-right: 15px;
+}
+
+@for $i from 1 through $flexbox-columns {
+	.flex-#{$i},
+	.flex {
+		@extend %flexbox-column;
+	}
+}
+.flex {
+	flex-basis: 0;
+	flex-grow: 1;
+	max-width: 100%;
+}
+
+@for $i from 1 through $flexbox-columns {
+	.flex-#{$i} {
+		@include make-flex($i, $flexbox-columns);
+	}
+}
+
+.order-first {
+	order: -1;
+}
+
+@for $i from 0 through $flexbox-columns {
+	.order-#{$i} {
+		order: #{$i};
+	}
+}
+
+.order-last {
+	order: $flexbox-columns + 1;
+}
+
+@each $screen, $layout in $screen-layout-flexbox {
+	@for $i from 1 through $flexbox-columns {
+		.#{$screen}\:flex-#{$i},
+		.#{$screen}\:flex {
+			@extend %flexbox-column;
+		}
+	}
+	@media (min-width: $layout) {
+		.#{$screen}\:flex {
+			flex-basis: 0;
+			flex-grow: 1;
+			max-width: 100%;
+		}
+		.#{$screen}\:flex-auto {
+			flex: 0 0 auto;
+			width: auto;
+			max-width: none;
+		}
+		@for $i from 1 through $flexbox-columns {
+			.#{$screen}\:flex-#{$i} {
+				@include make-flex($i, $flexbox-columns);
+			}
+		}
+
+		.#{$screen}\:order-first {
+			order: -1;
+		}
+
+		@for $i from 0 through $flexbox-columns {
+			.#{$screen}\:order-#{$i} {
+				order: #{$i};
+			}
+		}
+
+		.#{$screen}\:order-last {
+			order: $flexbox-columns + 1;
+		}
+	}
+}

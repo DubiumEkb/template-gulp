@@ -12,3 +12,20 @@
 }
 
 @import "components/fonts";
+@import "components/params";
+@import "components/typography";
+
+// Mixins
+@import "components/mixins";
+
+// Layout
+@import "components/layout/home";
+
+// Template
+@import "components/template/header";
+@import "components/template/main";
+@import "components/template/footer";
+
+// Components
+@import "components/container";
+@import "components/flexbox";
