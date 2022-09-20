@@ -1,4 +1,5 @@
+@use "sass:math";
 @mixin make-flex($size, $flexbox-columns) {
-	flex: 0 0 percentage($size / $flexbox-columns);
-	max-width: percentage($size / $flexbox-columns);
+	flex: 0 0 math.percentage(math.div($size, $flexbox-columns));
+	max-width: math.percentage(math.div($size, $flexbox-columns));
 }

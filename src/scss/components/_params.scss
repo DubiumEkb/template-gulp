@@ -1,21 +1,19 @@
 :root {
-	--font-family: "OpenSans", sans-serif;
-	--font-size: "1em";
-	--line-height: 1.25;
-	--color: #221c44;
-	--bg-color: #e1e4e8;
-	--white: #fff;
 }
 
 * {
 	margin: 0;
 	padding: 0;
-}
-
-*,
-*::before,
-*::after {
-	box-sizing: border-box;
+	outline: 0;
+	appearance: none;
+	border: 0;
+	text-decoration: none;
+	list-style: none;
+	&,
+	&::after,
+	&::before {
+		box-sizing: border-box;
+	}
 }
 
 $screen-layout-flexbox: (
@@ -36,84 +34,14 @@ $screen-layout-container: (
 
 $flexbox-columns: 12;
 
-%small-styles {
-	font-weight: 600;
-	font-size: 65%;
-	line-height: 1;
-	color: #999;
-}
-
-%input-for-form {
-	padding: 9px 7px;
-	font-size: 14px;
-	@media (max-width: 575px) {
-		width: 100%;
-		margin-bottom: 10px;
-	}
-	@media (min-width: 576px) {
-		margin-right: 5px;
-	}
-	@media (min-width: 768px) {
-		font-size: 16px;
-	}
-	@media (min-width: 992px) {
-		margin-right: 10px;
-		padding: 9px 12px;
-	}
-	@media (min-width: 1200px) {
-		font-size: 18px;
-		padding: 12px 14px;
-	}
-	background-color: var(--white);
-	border: 2px solid rgba(50, 58, 70, 0.5);
-	outline: none;
-	box-shadow: 0px 2px 4px -2px rgba(24, 39, 75, 0.12), 0px 4px 4px -2px rgba(24, 39, 75, 0.08);
-	border-radius: 4px;
-}
-
-%button-for-form {
-	font-size: 14px;
-	padding: 10px 15px 11px;
-	@media (max-width: 575px) {
-		width: 100%;
-	}
-	@media (min-width: 768px) {
-		font-size: 16px;
-	}
-	@media (min-width: 992px) {
-		font-size: 16px;
-		padding: 10px 20px 11px;
-	}
-	@media (min-width: 1200px) {
-		font-size: 18px;
-		padding: 14px 36px;
-	}
-	cursor: pointer;
-	border: none;
-	outline: none;
-	font-weight: 500;
-	color: var(--white);
-	background-color: #7480ff;
-	box-shadow: 0px 4px 6px -4px rgba(24, 39, 75, 0.12), 0px 8px 8px -4px rgba(24, 39, 75, 0.08);
-	text-transform: uppercase;
-	border-radius: 4px;
-	transition: all 0.3s;
-}
-
 $header-styles-mobile: (
 	"h1": 24,
 	"h2": 20,
 	"h3": 19,
-	"h4": 18,
-	"h5": 17,
-	"h6": 16,
 );
 
 $header-styles-desktop: (
 	"h1": 48,
 	"h2": 40,
 	"h3": 31,
-	"h4": 25,
-	"h5": 20,
-	"h6": 16,
 );
