@@ -8,7 +8,7 @@
 
 `yarn run build` - Build
 
-`yarn run buildScripts` - Build compression JavaScripts  
+`yarn run buildScripts` - Build compression JavaScripts
 
 `yarn run buildImages` - Build compression images to webp
 
@@ -60,4 +60,66 @@ template-gulp/
 ├── gulpfile.js
 ├── README.md
 └── yarn.lock
+```
+
+## Будущее
+### Новый этап развития
+```
+.
+├── gulp/
+│   ├── config/
+│   │   ├── path.js
+│   │   ├── plugins.js
+│   │   └── version.json
+│   └── tasks/
+│       ├── fonts.js
+│       ├── html.js
+│       ├── images.js
+│       ├── reset.js
+│       ├── scripts.js
+│       ├── scss.js
+│       ├── server.js
+│       ├── svgSprite.js
+│       └── zip.js
+└── src/
+    └── assets/
+        ├── fonts/
+        ├── images/
+        │   └── favicon/
+        ├── style/
+        │   ├── fonts/
+        │   │   ├── _typography.scss
+        │   │   └── _fonts.scss
+        │   ├── components/
+        │   │   ├── _flexbox.scss
+        │   │   └── _container.scss
+        │   ├── mixins/
+        │   │   └── _flexbox.scss
+        │   ├── pages/
+        │   │   ├── home/
+        │   │   └── about/
+        │   ├── layout/
+        │   │   ├── _header.scss
+        │   │   ├── _main.scss
+        │   │   └── _footer.scss
+        │   ├── _reset.scss
+        │   └── style.scss
+        ├── js/
+        │   ├── components/
+        │   │   └── webp.js
+        │   └── app.js
+        ├── pages/
+        │   ├── index.html
+        │   └── about.html
+        └── components/
+            ├── screens/
+            │   ├── slider.html
+            │   └── feedback.html
+            └── shared/
+                ├── header.html
+                ├── head.html
+                ├── main.html
+                ├── footer.html
+                ├── scripts.html
+                └── svg.html
 ```
