@@ -1,1 +1,1 @@
-import isWebp from "./components/webp";
+import isWebp from "./components/webp.js";

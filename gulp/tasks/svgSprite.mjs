@@ -1,4 +1,4 @@
-const svgSprite = require("gulp-svg-sprite");
+import svgSprite from "gulp-svg-sprite";
 
 const svgSpriteBuild = () => {
 	return app.gulp
@@ -8,8 +8,8 @@ const svgSpriteBuild = () => {
 				app.plugins.notify.onError({
 					title: "SVG",
 					message: "Error: <%= error.message %>",
-				}),
-			),
+				})
+			)
 		)
 		.pipe(
 			svgSprite({
@@ -19,9 +19,9 @@ const svgSpriteBuild = () => {
 						example: false,
 					},
 				},
-			}),
+			})
 		)
-		.pipe(app.gulp.dest(`${app.path.build.images}`))
-}
+		.pipe(app.gulp.dest(`${app.path.build.images}`));
+};
 
-module.exports = { svgSpriteBuild }
+export { svgSpriteBuild };

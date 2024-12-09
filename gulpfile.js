@@ -1,7 +1,7 @@
 // main
-const gulp = require('gulp')
-const { path } = require('./gulp/config/path')
-const { plugins } = require('./gulp/config/plugins')
+import gulp from "gulp";
+import { path } from "./gulp/config/path.mjs";
+import { plugins } from "./gulp/config/plugins.mjs";
 
 // global Variables
 global.app = {
@@ -10,76 +10,80 @@ global.app = {
 	path: path,
 	gulp: gulp,
 	plugins: plugins,
-}
+};
 
 // tasks
-const { otf2ttf, ttf2woff, fontsStyle } = require('./gulp/tasks/fonts')
-const { ftp } = require('./gulp/tasks/ftp')
-const { html } = require('./gulp/tasks/html')
-const { images } = require('./gulp/tasks/images')
-const { reset } = require('./gulp/tasks/reset')
-const { scripts } = require('./gulp/tasks/scripts')
-const { scss } = require('./gulp/tasks/scss')
-const { server } = require('./gulp/tasks/server')
-const { svgSpriteBuild } = require("./gulp/tasks/svgSprite")
-const { zip } = require('./gulp/tasks/zip')
+import { otf2ttf, ttf2woff, fontsStyle } from "./gulp/tasks/fonts.mjs";
+import { ftp } from "./gulp/tasks/ftp.mjs";
+import { html } from "./gulp/tasks/html.mjs";
+import { images } from "./gulp/tasks/images.mjs";
+import { reset } from "./gulp/tasks/reset.mjs";
+import { scripts } from "./gulp/tasks/scripts.mjs";
+import { scss } from "./gulp/tasks/scss.mjs";
+import { server } from "./gulp/tasks/server.mjs";
+import { svgSpriteBuild } from "./gulp/tasks/svgSprite.mjs";
+import { zip } from "./gulp/tasks/zip.mjs";
 
 // Watcher
 const watcher = () => {
-	gulp.watch(path.watch.html, html)
-	gulp.watch(path.watch.scss, scss)
-	gulp.watch(path.watch.scripts, scripts)
-	gulp.watch(path.watch.images, images)
-}
+	gulp.watch(path.watch.html, html);
+	gulp.watch(path.watch.scss, scss);
+	gulp.watch(path.watch.scripts, scripts);
+	gulp.watch(path.watch.images, images);
+};
 
-// Watcher tp FTP
+// Watcher to FTP
 const watcherToFTP = () => {
-	gulp.watch(path.watch.html, gulp.series(html, ftp))
-	gulp.watch(path.watch.scss, gulp.series(scss, ftp))
-	gulp.watch(path.watch.scripts, gulp.series(scripts, ftp))
-	gulp.watch(path.watch.images, gulp.series(images, ftp))
-}
+	gulp.watch(path.watch.html, gulp.series(html, ftp));
+	gulp.watch(path.watch.scss, gulp.series(scss, ftp));
+	gulp.watch(path.watch.scripts, gulp.series(scripts, ftp));
+	gulp.watch(path.watch.images, gulp.series(images, ftp));
+};
 
 // Fonts converter
-const fonts = gulp.series(otf2ttf, ttf2woff, fontsStyle)
+const fonts = gulp.series(otf2ttf, ttf2woff, fontsStyle);
 
 // mainTasks
 const mainTasks = gulp.series(
 	fonts,
-	gulp.parallel(html, scss, scripts, images),
-)
+	gulp.parallel(html, scss, scripts, images)
+);
 
 // Launch options
-const dev = gulp.series(reset, mainTasks, gulp.parallel(watcher, server))
-const devToFTP = gulp.series(reset, mainTasks, gulp.parallel(watcherToFTP, server))
-const build = gulp.series(reset, mainTasks)
-const buildScripts = gulp.series(reset, scripts)
-const buildImages = gulp.series(reset, images)
-const buildToZIP = gulp.series(reset, mainTasks, zip)
-const buildToFTP = gulp.series(reset, mainTasks, ftp)
+const dev = gulp.series(reset, mainTasks, gulp.parallel(watcher, server));
+const devToFTP = gulp.series(
+	reset,
+	mainTasks,
+	gulp.parallel(watcherToFTP, server)
+);
+const build = gulp.series(reset, mainTasks);
+const buildScripts = gulp.series(reset, scripts);
+const buildImages = gulp.series(reset, images);
+const buildToZIP = gulp.series(reset, mainTasks, zip);
+const buildToFTP = gulp.series(reset, mainTasks, ftp);
 
 // Build sprite.svg
-exports.svgSpriteBuild = svgSpriteBuild
+export { svgSpriteBuild };
 
 // Development
-exports.dev = dev
+export { dev };
 
 // Development to FTP
-exports.devToFTP = devToFTP
+export { devToFTP };
 
 // Build project
-exports.build = build
+export { build };
 
 // Build Scripts
-exports.buildScripts = buildScripts
+export { buildScripts };
 
 // Build Images
-exports.buildImages = buildImages
+export { buildImages };
 
 // Build to ZIP
-exports.buildToZIP = buildToZIP
+export { buildToZIP };
 
 // Build to FTP
-exports.buildToFTP = buildToFTP
+export { buildToFTP };
 
-exports.default = dev
+export default dev;

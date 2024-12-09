@@ -1,8 +1,9 @@
-const pathNode = require("path")
-const rootFolder = pathNode.basename(pathNode.resolve())
+import pathNode from "path";
 
-const buildFolder = "./dist"
-const srcFolder = "./src"
+const rootFolder = pathNode.basename(pathNode.resolve());
+
+const buildFolder = "./dist";
+const srcFolder = "./src";
 
 const path = {
 	build: {
@@ -27,10 +28,10 @@ const path = {
 		html: `${srcFolder}/**/*.html`,
 	},
 	clean: buildFolder,
-	buildFolder: buildFolder,
-	srcFolder: srcFolder,
-	rootFolder: rootFolder,
-	ftp: "verstka"
-}
+	buildFolder,
+	srcFolder,
+	rootFolder,
+	ftp: "verstka",
+};
 
-module.exports = { path }
+export { path };

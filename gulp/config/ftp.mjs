@@ -3,6 +3,6 @@ const configFTP = {
 	user: "",
 	password: "",
 	parallel: 5,
-}
+};
 
-module.exports = { configFTP }
+export { configFTP };

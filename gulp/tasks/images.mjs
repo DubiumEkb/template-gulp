@@ -1,5 +1,5 @@
-const webp = require('gulp-webp');
-const imagemin = require('gulp-imagemin');
+import webp from "gulp-webp";
+import imagemin from "gulp-imagemin";
 
 const images = () => {
 	return app.gulp
@@ -9,8 +9,8 @@ const images = () => {
 				app.plugins.notify.onError({
 					title: "IMAGES",
 					message: "Error: <%= error.message %>",
-				}),
-			),
+				})
+			)
 		)
 		.pipe(app.plugins.newer(app.path.build.images))
 		.pipe(app.plugins.if(app.isBuild, webp()))
@@ -19,8 +19,8 @@ const images = () => {
 		.pipe(
 			app.plugins.if(
 				app.isBuild,
-				app.plugins.newer(app.path.build.images),
-			),
+				app.plugins.newer(app.path.build.images)
+			)
 		)
 		.pipe(
 			app.plugins.if(
@@ -30,13 +30,13 @@ const images = () => {
 					svgoPlugins: [{ removeViewBox: false }],
 					interlaced: true,
 					optimizationLevel: 3, // 0 to 7
-				}),
-			),
+				})
+			)
 		)
 		.pipe(app.gulp.dest(app.path.build.images))
 		.pipe(app.gulp.src(app.path.src.svg))
 		.pipe(app.gulp.dest(app.path.build.images))
-		.pipe(app.plugins.sync.stream())
-}
+		.pipe(app.plugins.sync.stream());
+};
 
-module.exports = { images }
+export { images };

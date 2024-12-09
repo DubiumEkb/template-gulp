@@ -1,5 +1,7 @@
 # template-gulp
+
 ## Scripts gulp
+
 `yarn run svgSpriteBuild` - Build file sprite.svg
 
 `yarn run dev` - Development
@@ -17,7 +19,8 @@
 `yarn run buildToFTP` - Build and send in FTP server
 
 ## File structure
-```
+
+```text
 template-gulp/
 ├── dist
 ├── src/
@@ -27,17 +30,19 @@ template-gulp/
 │   │   ├── components/
 │   │   │   └── webp.js
 │   │   └── app.js
-│   ├── layout/
+│   ├── pages/
 │   │   └── index.html
 │   ├── scss/
 │   │   ├── components/
 │   │   │   └── _fonts.scss
 │   │   └── style.scss
 │   ├── svgSprite
-│   └── template/
-│       ├── footer.html
-│       ├── head.html
-│       └── header.html
+│   └── components/
+│       ├── screen/
+│       └── shared/
+│           ├── footer.html
+│           ├── head.html
+│           └── header.html
 ├── gulp/
 │   ├── config/
 │   │   ├── ftp.js
@@ -63,8 +68,10 @@ template-gulp/
 ```
 
 ## Будущее
+
 ### Новый этап развития
-```
+
+```text
 .
 ├── gulp/
 │   ├── config/
