@@ -1,18 +1,15 @@
-@import "components/params";
-@import "components/fonts";
-@import "components/typography";
-
-// Mixins
-@import "components/mixins";
+@use "./components/params" as *;
+@use "./components/fonts" as *;
+@use "./components/typography" as *;
 
 // Layout
-@import "components/layout/home";
+@use "./components/layout/home" as *;
 
 // Template
-@import "components/template/header";
-@import "components/template/main";
-@import "components/template/footer";
+@use "./components/template/header" as *;
+@use "./components/template/main" as *;
+@use "./components/template/footer" as *;
 
 // Components
-@import "components/container";
-@import "components/flexbox";
+@use "./components/container" as *;
+@use "./components/flexbox" as *;

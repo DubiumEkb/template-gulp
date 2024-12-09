@@ -1,21 +1,21 @@
+@use "./params" as *;
+
 @each $header, $styles in $header-styles-mobile {
-	@for $i from 1 through length($header) {
-		#{$header},
-		.#{$header} {
-			font-size: #{$styles}px;
-			margin: 0;
-			overflow-wrap: break-word;
-		}
+	#{$header},
+	.#{$header} {
+		font-size: #{$styles}px;
+		margin: 0;
+		overflow-wrap: break-word;
 	}
 }
 
 @media (min-width: 768px) {
 	@each $header, $styles in $header-styles-desktop {
-		@for $i from 1 through length($header) {
-			#{$header},
-			.#{$header} {
-				font-size: #{$styles}px;
-			}
+		#{$header},
+		.#{$header} {
+			font-size: #{$styles}px;
+			margin: 0;
+			overflow-wrap: break-word;
 		}
 	}
 }

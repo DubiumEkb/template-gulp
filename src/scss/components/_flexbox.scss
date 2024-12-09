@@ -1,3 +1,5 @@
+@use "./params" as *;
+
 .flexbox {
 	display: flex;
 	flex-wrap: wrap;

@@ -1,3 +1,5 @@
+@use "sass:math";
+
 :root {
 }
 
@@ -45,3 +47,8 @@ $header-styles-desktop: (
 	"h2": 40,
 	"h3": 31,
 );
+
+@mixin make-flex($size, $flexbox-columns) {
+	flex: 0 0 math.percentage(math.div($size, $flexbox-columns));
+	max-width: math.percentage(math.div($size, $flexbox-columns));
+}
