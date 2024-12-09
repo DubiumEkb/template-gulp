@@ -46,7 +46,8 @@ const fonts = gulp.series(otf2ttf, ttf2woff, fontsStyle);
 // mainTasks
 const mainTasks = gulp.series(
 	fonts,
-	gulp.parallel(html, scss, scripts, images)
+	gulp.parallel(html, scripts, images),
+	scss
 );
 
 // Launch options

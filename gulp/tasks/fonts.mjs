@@ -1,115 +1,123 @@
 import fs from "fs";
+import fsPromises from "fs/promises"; // Подключаем модуль fs/promises для работы с асинхронными функциями
 import fonter from "gulp-fonter";
+import ttf2woff2 from "gulp-ttf2woff2"; // Обычный импорт, без асинхронного вызова
+import mkdirp from "mkdirp";
 
-// Функция для динамического импорта модуля gulp-ttf2woff2
-const ttf2woff2Import = async () => {
-	return await import("gulp-ttf2woff2");
-};
+// Конвертация шрифтов из .otf в .ttf
+const otf2ttf = async () => {
+	// Создаем папку dist/fonts, если она не существует
+	mkdirp(app.path.build.fonts);
+	console.log(`Папка ${app.path.build.fonts} успешно создана.`);
 
-const otf2ttf = () => {
-	// Ищем файлы шрифтов *.otf
-	return (
-		app.gulp
-			.src(`${app.path.srcFolder}/fonts/*.otf`)
-			.pipe(
-				app.plugins.plumber(
-					app.plugins.notify.onError({
-						title: "FONTS",
-						message: "Error: <%= error.message %>",
-					})
-				)
-			)
-			// Конвертируем в *.ttf
-			.pipe(
-				fonter({
-					formats: ["ttf"],
+	return app.gulp
+		.src(`${app.path.srcFolder}/fonts/*.otf`)
+		.pipe(
+			app.plugins.plumber(
+				app.plugins.notify.onError({
+					title: "FONTS",
+					message: "Error: <%= error.message %>",
 				})
 			)
-			// Выгружаем в исходную папку
-			.pipe(app.gulp.dest(`${app.path.srcFolder}/fonts/`))
-	);
+		)
+		.pipe(
+			fonter({
+				formats: ["ttf"],
+			})
+		)
+		.pipe(app.gulp.dest(`${app.path.srcFolder}/fonts/`));
 };
 
+// Конвертация шрифтов из .ttf в .woff и .woff2
 const ttf2woff = async () => {
-	const ttf2woff2 = await ttf2woff2Import();
+	mkdirp(app.path.build.fonts);
+	console.log(`Папка ${app.path.build.fonts} успешно создана.`);
 
-	// Ищем файлы шрифтов *.ttf
-	return (
-		app.gulp
-			.src(`${app.path.srcFolder}/fonts/*.ttf`)
-			.pipe(
-				app.plugins.plumber(
-					app.plugins.notify.onError({
-						title: "FONTS",
-						message: "Error: <%= error.message %>",
-					})
-				)
-			)
-			// Конвертируем в *.woff
-			.pipe(
-				fonter({
-					formats: ["woff"],
+	return app.gulp
+		.src(`${app.path.srcFolder}/fonts/*.ttf`)
+		.pipe(
+			app.plugins.plumber(
+				app.plugins.notify.onError({
+					title: "FONTS",
+					message: "Error: <%= error.message %>",
 				})
 			)
-			.pipe(app.gulp.dest(`${app.path.build.fonts}`))
-			// Ищем файлы шрифтов *.ttf для конвертации в *.woff2
-			.pipe(app.gulp.src(`${app.path.srcFolder}/fonts/*.ttf`))
-			// Конвертируем в *.woff2
-			.pipe(ttf2woff2.default()) // Используем .default() для ES-модуля
-			.pipe(app.gulp.dest(`${app.path.build.fonts}`))
-	);
+		)
+		.pipe(
+			fonter({
+				formats: ["woff"],
+			})
+		)
+		.pipe(app.gulp.dest(`${app.path.build.fonts}`))
+		.pipe(app.gulp.src(`${app.path.srcFolder}/fonts/*.ttf`))
+		.pipe(ttf2woff2())
+		.pipe(app.gulp.dest(`${app.path.build.fonts}`));
 };
 
-const fontsStyle = () => {
-	// Файл стилей подключения шрифтов
+// Генерация файла _fonts.scss с описанием шрифтов
+const fontsStyle = async () => {
 	const fontsFile = `${app.path.srcFolder}/scss/components/_fonts.scss`;
+	const fontsDir = `${app.path.srcFolder}/fonts`;
 
-	// Проверяем, существуют ли файлы шрифтов
-	fs.readdir(app.path.build.fonts, (err, fontsFiles) => {
-		if (fontsFiles) {
-			// Проверяем, существует ли файл стилей для подключения шрифтов
-			if (!fs.existsSync(fontsFile)) {
-				// Если файла нет, то создаем его
-				fs.writeFile(fontsFile, "", cb);
+	try {
+		console.log("Чтение содержимого папки с шрифтами...");
+		const fontsFiles = await fsPromises.readdir(fontsDir);
+		console.log("Список файлов в папке с шрифтами:", fontsFiles);
+
+		if (fontsFiles.length > 0) {
+			const fileExists = await fsPromises
+				.stat(fontsFile)
+				.catch(() => false);
+			let fileContent = "";
+
+			if (fileExists) {
+				fileContent = await fsPromises.readFile(fontsFile, "utf-8");
+				console.log("Содержимое файла _fonts.scss:", fileContent);
+			}
+
+			if (!fileExists || fileContent.trim() === "") {
+				if (!fileExists) {
+					console.log(
+						"Файл _fonts.scss не существует. Создаю его..."
+					);
+					await fsPromises.writeFile(fontsFile, "");
+				}
+
 				let newFileOnly;
-				for (let i = 0; i < fontsFiles.length; i++) {
-					// Записываем подключения шрифтов в файл стилей
-					const fontFileName = fontsFiles[i].split(".")[0];
-					if (newFileOnly !== fontFileName) {
-						let fontName =
-							fontFileName.split("-")[0] || fontFileName;
-						let fontWeight =
-							fontFileName.split("-")[1] || fontFileName;
-
-						// Определяем вес шрифта
+				const fontPromises = fontsFiles.map(async (fontFileName) => {
+					const fontName = fontFileName.split(".")[0];
+					if (newFileOnly !== fontName) {
+						let fontWeight = fontName.split("-")[1] || fontName;
 						fontWeight = getFontWeight(fontWeight);
 
-						fs.appendFile(
+						console.log(
+							`Добавляю шрифт: ${fontName} с весом ${fontWeight}`
+						);
+
+						await fsPromises.appendFile(
 							fontsFile,
-							`@font-face {\n\tfont-family: ${fontName};\n\tfont-display: swap;\n\tsrc: url("../fonts/${fontFileName}.woff2") format("woff2"), url("../fonts/${fontFileName}.woff") format("woff");\n\tfont-weight: ${fontWeight};\n\tfont-style: normal;\n}\r\n`,
-							cb
+							`@font-face {\n\tfont-family: ${fontName};\n\tfont-display: swap;\n\tsrc: url("../fonts/${fontFileName}.woff2") format("woff2"), url("../fonts/${fontFileName}.woff") format("woff");\n\tfont-weight: ${fontWeight};\n\tfont-style: normal;\n}\r\n`
 						);
 						newFileOnly = fontFileName;
 					}
-				}
+				});
+
+				await Promise.all(fontPromises);
+				console.log("Шрифты добавлены в файл _fonts.scss.");
 			} else {
-				// Если файл есть, выводим сообщение
-				console.log(
-					"Файл scss/fonts.scss уже существует. Для обновления файла нужно его удалить!"
-				);
+				console.log("Файл _fonts.scss уже содержит данные.");
 			}
 		} else {
-			fs.writeFile(
-				fontsFile,
-				'// When you add fonts to the "/src/fonts/" folder, you have to delete this file so that gulp creates it with all the data!',
-				cb
-			);
+			console.log("В папке шрифтов нет файлов.");
 		}
-	});
+	} catch (err) {
+		console.error("Error processing fonts:", err);
+	}
 
 	return app.gulp.src(`${app.path.srcFolder}`);
 };
 
+// Функция для получения значения веса шрифта
 const getFontWeight = (fontWeight) => {
 	const weights = {
 		thin: 100,
