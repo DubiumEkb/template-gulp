@@ -1,21 +1,17 @@
 <!DOCTYPE html>
 <html lang="ru">
+	<head>
+		@@include("../components/shared/head.html", { "title": "Home page" })
+	</head>
 
-<head>
-	@@include("../components/shared/head.html", {
-	"title": "Home page"
-	})
-</head>
+	<body>
+		@@include("../components/shared/header.html")
 
-<body>
-	@@include("../components/shared/header.html")
+		<main>
+			<img src="./img/star.png" />
+		</main>
 
-	<main>
-
-	</main>
-
-	@@include("../components/shared/footer.html")
-	@@include("../components/shared/scripts.html")
-</body>
-
+		@@include("../components/shared/footer.html")
+		@@include("../components/shared/scripts.html")
+	</body>
 </html>

@@ -1,19 +1,15 @@
-const isWebp = () => {
+export const isWebp = () => {
 	function testWebP(callback) {
-		var webP = new Image()
+		var webP = new Image();
 		webP.onload = webP.onerror = function () {
-			callback(webP.height == 2)
-		}
+			callback(webP.height == 2);
+		};
 		webP.src =
-			"data:image/webp;base64,UklGRjoAAABXRUJQVlA4IC4AAACyAgCdASoCAAIALmk0mk0iIiIiIgBoSygABc6WWgAA/veff/0PP8bA//LwYAAA"
+			"data:image/webp;base64,UklGRjoAAABXRUJQVlA4IC4AAACyAgCdASoCAAIALmk0mk0iIiIiIgBoSygABc6WWgAA/veff/0PP8bA//LwYAAA";
 	}
 
 	testWebP(function (support) {
-		const className = support === true ? "webp" : "no-webp"
-		document.documentElement.classList.add(className)
-	})
-}
-
-isWebp()
-
-module.exports = isWebp;
+		const className = support === true ? "webp" : "no-webp";
+		document.documentElement.classList.add(className);
+	});
+};

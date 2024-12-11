@@ -1,6 +1,6 @@
-import fileInclude from "gulp-file-include";
-import webpHtmlNoSvg from "gulp-webp-html-nosvg";
-import versionNumber from "gulp-version-number";
+const fileInclude = require('gulp-file-include');
+const webpHtmlNoSvg = require("gulp-webp-html-nosvg");
+const versionNumber = require('gulp-version-number');
 
 const html = () => {
 	return app.gulp
@@ -10,8 +10,8 @@ const html = () => {
 				app.plugins.notify.onError({
 					title: "HTML",
 					message: "Error: <%= error.message %>",
-				})
-			)
+				}),
+			),
 		)
 		.pipe(fileInclude())
 		.pipe(app.plugins.replace(/@img\//g, "img/"))
@@ -29,11 +29,11 @@ const html = () => {
 					output: {
 						file: "gulp/version.json",
 					},
-				})
-			)
+				}),
+			),
 		)
 		.pipe(app.gulp.dest(app.path.build.html))
-		.pipe(app.plugins.sync.stream());
-};
+		.pipe(app.plugins.sync.stream())
+}
 
-export { html };
+module.exports = { html }

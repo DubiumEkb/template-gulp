@@ -1,5 +1,3 @@
-import browserSync from "browser-sync";
-
 const server = (done) => {
 	app.plugins.sync.init({
 		server: {
@@ -7,7 +5,7 @@ const server = (done) => {
 		},
 		notify: false,
 		port: 3000,
-	});
-};
+	})
+}
 
-export { server };
+module.exports = { server }

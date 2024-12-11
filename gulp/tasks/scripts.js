@@ -1,4 +1,4 @@
-import webpack from "webpack-stream";
+const webpack = require("webpack-stream")
 
 const scripts = () => {
 	return app.gulp
@@ -8,8 +8,8 @@ const scripts = () => {
 				app.plugins.notify.onError({
 					title: "JS",
 					message: "Error: <%= error.message %>",
-				})
-			)
+				}),
+			),
 		)
 		.pipe(
 			app.plugins.if(
@@ -17,24 +17,22 @@ const scripts = () => {
 				webpack({
 					mode: "none",
 					output: {
-						filename: "app.js",
+						filename: "app.js", // не сжимаемый файл
 					},
-				})
-			)
+				}),
+			),
 		)
-		.pipe(
-			app.plugins.if(app.isBuild, app.gulp.dest(app.path.build.scripts))
-		)
+		.pipe(app.plugins.if(app.isBuild, app.gulp.dest(app.path.build.scripts)))
 		.pipe(
 			webpack({
 				mode: app.isBuild ? "production" : "development",
 				output: {
-					filename: "app.min.js",
+					filename: "app.min.js", // сжимаемый файл
 				},
-			})
+			}),
 		)
 		.pipe(app.gulp.dest(app.path.build.scripts))
-		.pipe(app.plugins.sync.stream());
-};
+		.pipe(app.plugins.sync.stream())
+}
 
-export { scripts };
+module.exports = { scripts }
