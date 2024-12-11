@@ -17,7 +17,7 @@
 	"author": "DubiumEkb",
 	"license": "MIT",
 	"devDependencies": {
-		"browser-sync": "2.27.7",
+		"browser-sync": "lastest",
 		"del": "6.0.0",
 		"fs": "0.0.1-security",
 		"gulp": "4.0.2",
