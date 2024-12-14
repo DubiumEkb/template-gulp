@@ -1,13 +1,13 @@
 const sass = require("gulp-sass")(require("sass"))
-const rename = require('gulp-rename');
-const cleanCSS = require('gulp-clean-css');
-const webpCSS = require("gulp-webpcss");
-const autoprefixer = require("gulp-autoprefixer");
-const groupCssMediaQueries = require("gulp-group-css-media-queries");
+const rename = require("gulp-rename")
+const cleanCSS = require("gulp-clean-css")
+const webpCSS = require("gulp-webpcss")
+const autoprefixer = require("gulp-autoprefixer")
+const groupCssMediaQueries = require("gulp-group-css-media-queries")
 
 const scss = () => {
 	return app.gulp
-		.src(app.path.src.scss, { sourcemaps: app.isDev })
+		.src([app.path.src.scss, app.path.src.template_scss], { sourcemaps: app.isDev })
 		.pipe(
 			app.plugins.plumber(
 				app.plugins.notify.onError({
